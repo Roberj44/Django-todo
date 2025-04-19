@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+    <title>ToDo</title>
+</head>
+
+<body>
+    <header>
+        <h1>MIS TAREAS</h1>
+        <nav>
+            <a href="/tareas/tareascrear/" class="crear"> + Crear</a>
+            <a href="/cerrarsesion/">CERRAR SESIÓN</a>
+        </nav>
+    </header>
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'lista_tareas.css' %}">
+
+    {% for tarea in tareas %}
+
+        <div class="contenedor">
+            <a href="{% url 'tareasdetalles' pk=tarea.pk %}" class="tarea"> {{tarea.titulo}} </a>
+            <a href="{% url 'tareasborrar' pk=tarea.pk %}" class="eliminar">Eliminar</a>
+        </div>
+
+    {% endfor %}
+
+
+</body>
+
+</html>
+
+

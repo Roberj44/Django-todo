@@ -1,0 +1,12 @@
+
+
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'detalles_tarea.css' %}">
+
+<a href="/tareas/tareas/">ATRAS</a>
+
+    <div class="contenedor">
+        <p class="titulo">{{tarea.titulo}}</p>
+        <p class="detalle">{{tarea.descripcion}}</p>
+    </div>

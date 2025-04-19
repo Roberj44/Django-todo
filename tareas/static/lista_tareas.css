@@ -1,0 +1,61 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    background-color: white;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 50px;
+    color: rgb(1, 3, 153);
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+nav{
+    display: flex;
+    gap: 15px;
+}
+
+nav a{
+    border: 2px solid rgb(1, 3, 153);
+    padding: 4px 5px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(1, 3, 153);
+    transition: 0.3s;
+}
+
+nav a:hover{
+    background-color: rgb(1, 3, 153);
+    color: rgb(253, 253, 253);
+}
+
+.contenedor{
+    margin: 20px 20px;
+}
+
+.tarea{
+    display: block;
+    background-color: rgb(219, 219, 219);
+    height: 30px;
+    align-items: center;
+    padding-top: 5px;
+    padding-left: 10px;
+    text-decoration: none;
+    border-radius: 10px;
+    text-transform: uppercase;
+    color: rgb(1, 3, 153);
+}
+
+.eliminar{
+    text-decoration: none;
+    color: red;
+    padding: 10px;
+}

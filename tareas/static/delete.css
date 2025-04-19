@@ -1,0 +1,59 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(to right, rgb(0, 0, 95), rgb(29, 29, 255));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+section{
+    background-color: rgb(228, 228, 228);
+    width: 400px;
+    height: 400px;
+    padding: 60px 40px 0 40px;
+    border-radius: 50px;
+    box-shadow: 0 1px 10px rgb(0, 0, 0);
+}
+
+h1{
+    color: red;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+button{
+    margin-left: 30px;
+    margin-right: 60px;
+    padding: 10px 15px;
+    border: 2px solid red;
+    border-radius: 50PX;
+    color: red;
+    font-weight: bold;
+    transition: 0.3s;
+}
+button:hover{
+    color: white;
+    background-color: red;
+}
+
+div{
+    margin-top: 100px;
+}
+
+a{
+    text-decoration: none;
+    border: 2px solid blue;
+    padding: 8px 5px;
+    border-radius: 50px;
+    color: blue;
+    font-weight: bold;
+    transition: 0.3s;
+}
+a:hover{
+    color: white;
+    background-color: blue;
+}

@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'iniciarsesion.css' %}">
+    <title>Iniciar Sesion</title>
+</head>
+
+<a href="/registro/">REGISTRATE</a>
+
+<body>
+    <div class="login">
+        <h1>INICIAR SESION</h1>
+        <hr>
+        <form method="post">
+            {% csrf_token %}
+            {{form.username}}
+            {{form.password}}
+            <button type="submit">INICIAR SESION</button>
+            {% if messages %}
+    
+                {% for mensaje in messages %}
+    
+                    {{mensaje}}
+    
+                {% endfor %}
+    
+            {% endif %}
+        </form>
+    </div>
+    <script>
+        var form_fields = document.getElementsByTagName("Input")
+        form_fields[1].placeholder="Usuario"
+        form_fields[2].placeholder="Contraseña"
+
+        for (var field in form_fields){
+            form_fields[field].className == "form"
+        }
+    </script>
+</body>
+</html>

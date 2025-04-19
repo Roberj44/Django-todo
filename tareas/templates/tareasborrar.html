@@ -1,0 +1,14 @@
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'delete.css' %}">
+
+<form method="post">
+    {% csrf_token %}
+    <section>
+        <h1>ESTAS SEGURO DE QUE QUIERES BORRAR LA TAREA?</h1>
+        <div>
+            <button type="submit">ELIMINAR</button>
+            <a href="/tareas/tareas/">CANCELAR</a>
+        </div> 
+    </section>
+</form>
