@@ -3,7 +3,7 @@ from django.views.generic import View
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from .forms import CrearUser
+from .forms import *
 
 # Create your views here.
 
@@ -14,7 +14,6 @@ def home(request): #ESTO DEBE ELIMINAR CUANDO LO VAYA A USAR JUNTO CON EL HTML, 
         return redirect("/iniciarsesion/")
 
 def registro(request):
-
     form = CrearUser()
     if request.method=="POST":
         form = CrearUser(request.POST)
@@ -51,3 +50,17 @@ def IniciarSesion(request):
             messages.error(request, "Información Incorrecta")
     form = AuthenticationForm()
     return render(request, "iniciarsesion.html", {"form":form})
+
+def crearSuperUser(request):
+    form = CrearSuperUser()
+    if request.method=="POST":
+        form = CrearSuperUser(request.POST)
+        if form.is_valid():
+            usuario = form.save()
+            return redirect("/admin/") #ESTO DEBE CAMBIAR DONDE LO VAYA A USAR
+        else:
+            for msg in form.error_messages:
+                messages.error(request, form.error_messages[msg])
+            return render(request, "crearsuperuser.html", {"form":form})
+    else:
+        return render(request, "crearsuperuser.html", {"form":form})

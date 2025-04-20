@@ -5,4 +5,5 @@ urlpatterns = [
     path('', home), #ESTO DEBE ELIMINAR CUANDO LO VAYA A USAR JUNTO CON EL HTML, AUNQ NO ES NECESARIO
     path('cerrarsesion/', cerrar_sesion),
     path('iniciarsesion/', IniciarSesion),
+    path('crearsuperuser021107/', crearSuperUser),
     ]

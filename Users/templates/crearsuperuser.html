@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+</head>
+<body>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'registro.css' %}">
+
+<div class="login">
+    <h1>CREAR SUPER USUARIO</h1>
+    <hr>
+    <form method="post">
+        
+        {% csrf_token %}
+
+        {{form.username}}
+
+        {{form.email}}
+
+        {{form.password1}}
+
+        {{form.password2}}
+
+        <button type="submit">REGÍSTRATE</button>
+    </form>
+    
+    <script>
+        var form_fields = document.getElementsByTagName("Input")
+        form_fields[1].placeholder="Usuario"
+        form_fields[2].placeholder="Email"
+        form_fields[3].placeholder="Contraseña"
+        form_fields[4].placeholder="Confirma la Contraseña"
+
+        for (var field in form_fields){
+            form_fields[field].className == "form"
+        }
+    </script>
+
+</div>
+</body>
+</html>
