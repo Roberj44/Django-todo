@@ -10,28 +10,34 @@
 
 <body>
     <header>
-        <h2>TAREAS</h2>
-        <nav>
-            <a href="/tareas/tareascrear/" class="crear"> + Crear</a>
-            <a href="/cerrarsesion/">CERRAR SESIÓN</a>
-        </nav>
+        <h2>Mis Tareas</h2>
     </header>
-    
+
     {% load static %}
     <link rel="stylesheet" href="{% static 'lista_tareas.css' %}">
 
-    {% for tarea in tareas %}
-
-        <div class="contenedor">
+    <div class="contenedor">
+        <a href="/tareas/tareascrear/" class="crear">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px" fill="currentColor">
+                <path fill-rule="evenodd"
+                    d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z" />
+            </svg>
+            <p>Nueva tarea</p>
+        </a>
+        <div class="in">
+            {% for tarea in tareas %}
             <a href="{% url 'tareasdetalles' pk=tarea.pk %}" class="tarea"> {{tarea.titulo}} </a>
-            <a href="{% url 'tareasborrar' pk=tarea.pk %}" class="eliminar">Eliminar</a>
+            <p class="descripcion">{{tarea.descripcion|truncatechars:22}}</p>
+            <!-- <a href="{% url 'tareasborrar' pk=tarea.pk %}" class="eliminar">Eliminar</a> -->
+            <hr>
+            {% endfor %}
         </div>
+    </div>
 
-    {% endfor %}
-
+    <script>
+        const hr = document.querySelector(".in").lastChild.previousSibling.remove()
+    </script>
 
 </body>
 
 </html>
-
-
