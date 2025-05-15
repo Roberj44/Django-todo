@@ -11,23 +11,20 @@ header{
     top: 0;
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
     padding: 15px 8%;
-    color: rgb(255, 255, 255);
+    color: rgb(10, 122, 0);
     font-size: 18px;
     margin-bottom: 0px;
 }
 
 header h2{
-    background-color: rgb(11, 136, 0);
-    padding: 0 10px;
-    border-radius: 20px;
+    color: rgb(10, 122, 0);
 }
 
 .crear{
     display: inline-block;
     padding: 3px 6px 0 3px;
-    margin-bottom: 15px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
@@ -37,15 +34,14 @@ header h2{
     transition: 0.3s;
 }
 
-.contenedor{
-    padding: 20px 8%;
-}
+/* .contenedor{
+} */
 
 .in{
     border-radius: 10px;
     background-color: rgb(219, 219, 219);
     overflow: hidden;
-    max-width: 380px;
+    /* max-width: 320px; */
 }
 
 hr{
@@ -61,7 +57,6 @@ hr{
     padding-left: 10px;
     text-decoration: none;
     /* border-radius: 10px; */
-    text-transform: uppercase;
     color: rgb(0, 0, 0);
 }
 
@@ -81,3 +76,54 @@ hr{
     position: relative;
     bottom: 5px;
 }
+
+.btnsec{
+    margin-left: 8%;
+    margin-top: 15px;
+}
+
+.active{
+    color: rgb(10, 122, 0);
+}
+
+@media (min-width: 730px){
+    .derecha{
+        margin-left: 5px;
+        background-color: rgb(219, 219, 219);
+        border-radius: 10px;
+        padding: 5px 5px 5px 10px;
+    }
+    
+    .all{
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+        padding: 10px 8%;
+    }
+
+    .btnside{
+        display: none;
+    }
+}
+
+@media(max-width: 730px){
+    .contenedor{
+        position: fixed;
+        right: -200px;
+        top: 60px;
+        width: 200px;
+        height: 100%;
+        transition: 0.3s ease;
+        z-index: 1000;
+        /*box-shadow: 2px 0 5px rgba(0,0,0,0.1);*/
+    }
+    .contenedor.active{
+        right: -0;
+    }
+
+    .derecha{
+        margin: 10px 8%;
+    }
+}
+
+
+

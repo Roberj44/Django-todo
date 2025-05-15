@@ -1,24 +1,37 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .forms import *
+from django.http import JsonResponse
 
 # Create your views here.
 
-class TareasLista(LoginRequiredMixin, ListView):
-    model = Tareas
-    context_object_name = "tareas"
-    template_name = "lista_tareas.html"
+def TareasLista(request):
+    tareas = Tareas.objects.filter(usuario=request.user).order_by("-id")
+    return render(request, "lista_tareas.html", {"tareas":tareas})
 
-    def get_queryset(self):
-        return Tareas.objects.filter(usuario=self.request.user)
+#class TareasLista(LoginRequiredMixin, ListView):
+    #model = Tareas
+    #context_object_name = "tareas"
+    #template_name = "lista_tareas.html"
+
+    #def get_queryset(self):
+        #return Tareas.objects.filter(usuario=self.request.user)
     
 class TareasDetalles(LoginRequiredMixin, DetailView):
     model = Tareas
     context_object_name = "tarea"
     template_name = "detalles_tarea.html"
+
+def Detalles(request, tarea_id):
+    tarea = get_object_or_404(Tareas, id=tarea_id, usuario=request.user)
+    data = {
+        "titulo": tarea.titulo,
+        "descripcion":tarea.descripcion,
+    }
+    return JsonResponse(data)
 
 class TareasCrear(LoginRequiredMixin, CreateView):
     model = Tareas
