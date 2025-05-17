@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
-from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .forms import *
@@ -20,10 +20,10 @@ def TareasLista(request):
     #def get_queryset(self):
         #return Tareas.objects.filter(usuario=self.request.user)
     
-class TareasDetalles(LoginRequiredMixin, DetailView):
-    model = Tareas
-    context_object_name = "tarea"
-    template_name = "detalles_tarea.html"
+#class TareasDetalles(LoginRequiredMixin, DetailView):
+    #model = Tareas
+    #context_object_name = "tarea"
+    #template_name = "detalles_tarea.html"
 
 def Detalles(request, tarea_id):
     tarea = get_object_or_404(Tareas, id=tarea_id, usuario=request.user)
@@ -42,6 +42,12 @@ class TareasCrear(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.usuario = self.request.user
         return super().form_valid(form)
+    
+class TareasUpdate(LoginRequiredMixin, UpdateView):
+    model = Tareas
+    fields = ["titulo", "descripcion"]
+    template_name = "tareasupdate.html"
+    success_url = reverse_lazy("tareas")
 
 class TareasBorrar(LoginRequiredMixin, DeleteView):
     model = Tareas

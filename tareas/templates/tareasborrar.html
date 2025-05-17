@@ -1,14 +1,23 @@
-
-{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% load static %}
 <link rel="stylesheet" href="{% static 'delete.css' %}">
 
 <form method="post">
     {% csrf_token %}
     <section>
-        <h1>ESTAS SEGURO DE QUE QUIERES BORRAR LA TAREA?</h1>
+        <h1>Estás seguro de que quieres borrar la nota?</h1>
         <div>
-            <button type="submit">ELIMINAR</button>
-            <a href="/tareas/tareas/">CANCELAR</a>
+            <button type="submit">Eliminar</button>
+            <a href="/tareas/tareas/">Cancelar</a>
         </div> 
     </section>
 </form>
+</body>
+</html>

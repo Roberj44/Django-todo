@@ -10,11 +10,11 @@
 
 <body>
     <header>
-        <h2>Mis Tareas</h2>
+        <h2>Mis Notas</h2>
         <div class="btnside">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                    fill="currentColor">
-                    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                fill="currentColor">
+                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
             </svg>
         </div>
     </header>
@@ -23,13 +23,13 @@
     <link rel="stylesheet" href="{% static 'lista_tareas.css' %}">
 
     <section class="btnsec">
-    <a href="/tareas/tareascrear/" class="crear">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px" fill="currentColor">
-            <path fill-rule="evenodd"
-                d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z" />
-        </svg>
-        <p>Nueva tarea</p>
-    </a>
+        <a href="/tareas/tareascrear/" class="crear">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px" fill="currentColor">
+                <path fill-rule="evenodd"
+                    d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z" />
+            </svg>
+            <p>Nueva nota</p>
+        </a>
     </section>
 
     <section class="all">
@@ -37,9 +37,19 @@
             <div class="in">
                 <ul id="ulhr">
                     {% for tarea in tareas %}
-                        <li class="tarea tarea-item" data-tarea-id="{{ tarea.id }}"> {{tarea.titulo}} </li>
-                        <p class="descripcion">{{tarea.descripcion|truncatechars:12}}</p>
-                        <hr>
+                    <div class="notes">
+                        <div class="main">
+                            <li class="tarea tarea-item" data-tarea-id="{{ tarea.id }}"> {{tarea.titulo}} </li>
+                        </div>
+                        <div class="botones">
+                            <select id="miSelect">
+                                <option value="">Opciones</option>
+                                <option value="{% url 'tareasupdate' tarea.id %}">Editar</option>
+                                <option value="{% url 'tareasborrar' tarea.id %}">Eliminar</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
                     {% endfor %}
                 </ul>
             </div>
@@ -53,38 +63,47 @@
     </section>
 
     <script>
+        const selects = document.querySelectorAll("select")
+        selects.forEach(item => {
+            item.addEventListener("change", function(){
+            if (this.value){
+                window.location.href = this.value;
+            }
+        });
+        });
+
         document.querySelector('.btnside').addEventListener('click', function () {
             document.querySelector('.contenedor').classList.toggle('active');
             //this.querySelector('i').classList.toggle('fa-times');
         });
         const lis = document.querySelectorAll('li')
         lis.forEach(item => {
-            item.addEventListener("click", function() {
+            item.addEventListener("click", function () {
                 document.querySelector('.contenedor').classList.toggle('active');
             })
         })
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    const tareaItems = document.querySelectorAll('.tarea-item');
-    
-    tareaItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Remover clase activa de todos los items
-            tareaItems.forEach(i => i.classList.remove('active'));
-            
-            // Agregar clase activa al item seleccionado
-            this.classList.add('active');
-            
-            // Obtener el ID de la tarea
-            const tareaId = this.getAttribute('data-tarea-id');
-            
-            // Hacer petición AJAX para obtener los detalles
-            fetch(`/tareas/detalles/${tareaId}/`)
-                .then(response => response.json())
-                .then(data => {
-                    // Construir el HTML con los detalles
-                    let html = `
+        document.addEventListener('DOMContentLoaded', function () {
+            const tareaItems = document.querySelectorAll('.tarea-item');
+
+            tareaItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    // Remover clase activa de todos los items
+                    tareaItems.forEach(i => i.classList.remove('active'));
+
+                    // Agregar clase activa al item seleccionado
+                    this.classList.add('active');
+
+                    // Obtener el ID de la tarea
+                    const tareaId = this.getAttribute('data-tarea-id');
+
+                    // Hacer petición AJAX para obtener los detalles
+                    fetch(`/tareas/detalles/${tareaId}/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Construir el HTML con los detalles
+                            let html = `
                         <div class="card">
                             <div class="card-header">
                                 <h3>${data.titulo}</h3>
@@ -94,18 +113,18 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         </div>
                     `;
-                    
-                    // Insertar en el div de detalles
-                    document.getElementById('detalles-tarea').innerHTML = html;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    document.getElementById('detalles-tarea').innerHTML = 
-                        '<p class="text-danger">Error al cargar los detalles de la tarea</p>';
+
+                            // Insertar en el div de detalles
+                            document.getElementById('detalles-tarea').innerHTML = html;
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            document.getElementById('detalles-tarea').innerHTML =
+                                '<p class="text-danger">Error al cargar los detalles de la tarea</p>';
+                        });
                 });
+            });
         });
-    });
-});
 
     </script>
 
